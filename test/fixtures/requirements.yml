@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyText
+  section: MyString
+  type: 
+  order: 1
+  challenge_id: MyString
+  library: MyString
+  active: 
+  : 
+  =: MyString
+
+two:
+  description: MyText
+  section: MyString
+  type: 
+  order: 1
+  challenge_id: MyString
+  library: MyString
+  active: 
+  : 
+  =: MyString
