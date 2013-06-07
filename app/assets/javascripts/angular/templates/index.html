@@ -1,0 +1,139 @@
+<style type="text/css">
+#wrap {
+   width:100%;
+   margin:0 auto;
+}
+#input_col {
+   float:left;
+   width:50%;
+}
+#spacer_col {
+   float:left;
+   width:3%;
+}
+#display_col {
+   float:right;
+   width:47%;
+}
+</style>
+
+<h1>Madison Requirements Builder</h1>
+<p>Add your requirements for your challenge on the left to dynamically build the output and the scorecard on which participants will be judged.</p><br/>
+
+<div ng-controller="MainUICtrl">
+
+<div id="wrap">
+    <div id="input_col">
+
+      <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              Add Your Functional Requirements
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+
+              <div ng-show="mode == 'add'">
+
+                <form ng-submit="add()">
+                    <textarea name="description" ng-model="newRequirement.description" rows="15" style="width:425px"></textarea><br/>
+                    <button type="submit" class="btn btn-primary" data-toggle="button">Add Requirement</button>
+                </form>              
+
+              </div>
+
+              <div ng-show="mode == 'edit'">
+
+                <form ng-submit="update()">
+                    <textarea name="description" ng-model="requirement.description" rows="15" style="width:425px"></textarea><br/>
+                    Type: <select ng-model="requirement.type" ng-options="t for t in types"></select><br/>
+                    <button type="button" class="btn btn-primary" data-toggle="button" ng-click="done()">Done Editing</button>
+                </form> 
+
+              </div>               
+
+            </div>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+              Load Requirements from our Library
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+
+              <p>Would you like to add the standard requirements for various types of platforms/languages? You can always modify and delete them after being added.</p>
+              <form ng-submit="addstandard()">
+                  <select ng-model="standardtype" ng-options="t.name for t in stdrequirments"></select><br/>
+                  <button type="submit" class="btn btn-primary" data-toggle="button">Add Selected Requirements</button>
+              </form>    
+
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      <p><button type="button" class="btn btn-success" data-toggle="button">Done Adding Requirements</button></p>     
+        
+    </div>
+
+    <div id="spacer_col"></div>
+
+    <div id="display_col">
+
+      <ul class="nav nav-tabs">
+        <li><a href="#requirements" data-toggle="tab">Requirements</a></li>
+        <li><a href="#scorecard" data-toggle="tab">Scorecard</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="requirements">
+          
+            <div ng-repeat="req in requirements" style="padding-bottom:25px">
+            {{req.description}}<br/><br/>
+            <button class="btn btn-mini btn-primary" type="button" ng-click="edit(req)">Edit</button>
+            <button class="btn btn-mini btn btn-danger" type="button" ng-click="delete(req)">Delete</button>
+             (debug: {{req.section}})</p>
+          </div>
+
+        </div>
+        <div class="tab-pane" id="scorecard">
+          
+
+            <div ng-repeat="req in requirements" style="padding-bottom:25px">
+            {{req.description}}<br/>
+
+            <div ng-show="req.type == 'Yes/No'">
+              <label class="radio inline"><input type="radio" name="question_{{req.order}}">Yes</label>
+              <label class="radio inline"><input type="radio" name="question_{{req.order}}">No</label>
+            </div>
+
+            <div ng-show="req.type == '1-4'">
+              <input type="radio" name="question_{{req.order}}"> 25% <input type="radio" name="question_{{req.order}}"> 50% <input type="radio" name="question_{{req.order}}">75% <input type="radio" name="question_{{req.order}}"> 100%
+            </div>
+
+            <div ng-show="req.type == '1-5'">
+              <input type="radio" name="question_{{req.order}}"> 20% <input type="radio" name="question_{{req.order}}"> 40% <input type="radio" name="question_{{req.order}}">60% <input type="radio" name="question_{{req.order}}"> 80% <input type="radio" name="question_{{req.order}}"> 100%
+            </div>            
+
+            <div ng-show="req.type == '1-10'">
+              <input type="radio" name="question_{{req.order}}"> 10% <input type="radio" name="question_{{req.order}}"> 20% <input type="radio" name="question_{{req.order}}">30% <input type="radio" name="question_{{req.order}}"> 40% <input type="radio" name="question_{{req.order}}"> 50% <input type="radio" name="question_{{req.order}}"> 60% <input type="radio" name="question_{{req.order}}"> 70% <input type="radio" name="question_{{req.order}}">80% <input type="radio" name="question_{{req.order}}"> 90% <input type="radio" name="question_{{req.order}}"> 100%
+            </div>     
+
+            <div ng-show="req.type == 'Comments'">
+              <textarea></textarea>
+            </div>  
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+</div>
+
+</div>
