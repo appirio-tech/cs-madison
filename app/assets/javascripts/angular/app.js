@@ -5,13 +5,13 @@
     the routing information.
 
     Our module will be called 'app'.
-
-    Note: We need the empty array after the 'app' declaration, without it, you
-    get an error complaining about 'No module <MODULE>'.
  */
 angular.module('app', ['ngResource'])
-    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-        $routeProvider
-            .when('/', {controller: 'MainUICtrl', templateUrl: '/assets/angular/templates/index.html'})
-            .otherwise({redirectTo: '/'});
+  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    $routeProvider
+      .when(
+        '/:challenge_id', {controller: 'MainUICtrl', 
+        templateUrl: '/assets/angular/templates/index.html'
+      })
+      .otherwise({redirectTo: '/'});
 }]);

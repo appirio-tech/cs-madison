@@ -11,18 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607125644) do
+ActiveRecord::Schema.define(:version => 20130607152025) do
 
   create_table "requirements", :force => true do |t|
     t.text     "description"
     t.string   "section"
-    t.string   "type"
-    t.integer  "order"
+    t.string   "scoring_type"
+    t.integer  "order_by"
     t.string   "challenge_id"
     t.string   "library"
     t.boolean  "active",       :default => true
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.float    "weight"
   end
 
 end
